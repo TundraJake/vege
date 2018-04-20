@@ -1,0 +1,21 @@
+<!-- 
+  Jacob McKenna
+  UAF CS492 Computer Security I 
+ -->
+
+{% extends 'html/layout.html' %}
+
+{% block body %}
+  <h1>Login</h1>
+  <form action="" method="POST">
+    <div class="form-group">
+      <label>IZ</label>
+      <input type="text" name="iz" class="form-control" value={{request.form.iz}}>
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" name="password" class="form-control" value={{request.form.password}}>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+{% endblock %}
