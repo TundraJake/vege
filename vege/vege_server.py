@@ -156,7 +156,11 @@ def new_vege():
 
 	# Load the form class by passing request.form to the UserRegisterForm class.
 	form = NewVegeForm(request.form)
+	curs = mysql.connection.cursor()
 
+	curs.execute("SELECT * FROM Vegetable;")
+	vege = curs.fetchall()
+	
 	if request.method == 'POST' and form.validate():
 		vege_name = form.name.data 
 
@@ -183,7 +187,8 @@ def new_vege():
 			flash('New Vege is now regiztered', 'success')
 			
 			return redirect(url_for('new_vege'))
-	return render_template('html/new_vege.html', form=form)
+
+	return render_template('html/new_vege.html', form=form, vege=vege)
 
 
 @app.route('/new_user', methods=['GET', 'POST'])

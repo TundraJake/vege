@@ -16,4 +16,10 @@
     <p><input type="submit" class="btn btn-primary" value="Submit"></p>
   </form>
 
+  <h1>List of current Veggies</h1>
+  <div>
+    {% for veg in vege %}
+      <tr>{{veg}}</tr> <br>
+    {% endfor %}
+  </div>
 {% endblock %}
