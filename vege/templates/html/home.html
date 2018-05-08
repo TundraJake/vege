@@ -15,7 +15,9 @@
       	<p>If you're new here, click "New User" at the top to register. Otherwise, feel like bidding below!</p>  
     </div>
     <div class="container">
-    	{{ table }}
+    	{% for item in table %}
+        <tr>{{item}}</tr> <br>
+      {% endfor %}
     </div>
 
 {% endblock %}

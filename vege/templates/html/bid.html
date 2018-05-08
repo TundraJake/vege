@@ -1,0 +1,28 @@
+<!-- 
+  Jacob McKenna
+  UAF CS492 Computer Security I 
+ -->
+
+{% extends "html/layout.html" %}
+
+{% block body %}
+
+<div class="container">
+
+
+  <h1>New Bid</h1>
+  {% from "includes/_formhelpers.html" import render_field %}
+  <form method="POST" action="">
+    <div class="form-group">
+      {{render_field(form.bid, class_="form-control")}}
+    </div>
+    <div class="form-group">
+      {{render_field(form.vege, class_="form-control")}}
+    </div>
+    <div class="form-group">
+      {{render_field(form.bidding_user, class_="form-control")}}
+    </div>
+    <p><input type="submit" class="btn btn-primary" value="Submit"></p>
+  </form>
+
+{% endblock %}

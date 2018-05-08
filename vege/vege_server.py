@@ -66,6 +66,39 @@ def home():
 	curs.close()
 	return render_template('html/home.html', table=table)
 
+
+@app.route('/bid', methods=['GET', 'POST'])
+def bid():
+	form = BidForm(request.form)
+	curs = mysql.connection.cursor()
+
+	if request.method == 'POST' and form.validate():
+		bid = form.bid.data 
+		vege = form.vege.data 
+		bidding_user = form.bidding_user.data 
+
+		result = curs.execute("SELECT * FROM Vegetable where name = %s;", [vege])
+
+		if result == 0:
+			flash('No vege by that name!', 'error')
+			error = 'No veggie by that name!'
+			return render_template('html/bid.html', error=error, form=form)
+
+
+		curs.execute("INSERT INTO Bids (bid, vege, bidding_user) VALUES (%s, %s, %s);", [bid, vege, bidding_user])
+
+		# Commit changes to DB.
+		mysql.connection.commit()
+
+		# Close connection! 
+		curs.close()
+
+		flash('New Bid is now placed!', 'success')
+		
+		return redirect(url_for('home'))
+
+	return render_template('html/bid.html', form=form)
+
 # Login
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -107,7 +140,14 @@ def login():
 @app.route('/view_bidderz')
 @is_logged_in
 def view_bidderz():
-	return render_template('html/bidderz.html')
+
+	curs = mysql.connection.cursor()
+	curs.execute("SELECT * FROM User;")
+	table = curs.fetchall()
+	curs.close()
+
+
+	return render_template('html/bidderz.html', table=table)
 
 
 @app.route('/new_vege', methods=['GET', 'POST'])
