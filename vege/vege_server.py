@@ -80,7 +80,7 @@ def bid():
 		result = curs.execute("SELECT * FROM Vegetable where name = %s;", [vege])
 
 		if result == 0:
-			flash('No vege by that name!', 'error')
+			flash('VERBOTEN!!!!', 'error')
 			error = 'No veggie by that name!'
 			return render_template('html/bid.html', error=error, form=form)
 
@@ -160,7 +160,7 @@ def new_vege():
 
 	curs.execute("SELECT * FROM Vegetable;")
 	vege = curs.fetchall()
-	
+
 	if request.method == 'POST' and form.validate():
 		vege_name = form.name.data 
 
