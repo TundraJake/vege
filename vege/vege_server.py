@@ -121,7 +121,7 @@ def login():
 				session['logged_in'] = True
 				session['userid'] = data['user']
 
-				result = curs.execute("SELECT * FROM USER where iz = %s;", [iz])
+				result = curs.execute("SELECT * FROM User where iz = %s;", [iz])
 				data = curs.fetchone()
 				session['iz'] = data['iz']
 
